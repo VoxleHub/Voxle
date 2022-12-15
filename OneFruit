@@ -1,0 +1,659 @@
+repeat wait() until game:IsLoaded()
+
+local vu = game:GetService("VirtualUser")
+
+
+local VirtualUser=game:service'VirtualUser'
+    game:service'Players'.LocalPlayer.Idled:connect(function()
+    warn("anti-afk")
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+
+local Locale = {}
+
+    for i, v in pairs(game:GetService("Workspace").Locations:GetChildren()) do
+        if v:IsA "Part"  then
+            table.insert(Locale, tostring(v))
+    end
+end
+
+local plr = game:GetService("Players").LocalPlayer
+local wrk = game:GetService("Workspace")
+local reps = game:GetService("ReplicatedStorage")
+local runs = game:GetService("RunService")
+local tfarm
+
+
+local bridgeModul = require(reps.BridgeNet)
+local indexToolModul = require(reps.INDEXER.ToolsInfo)
+local indexQuestModul = require(reps.INDEXER.QuestInfo)
+
+local weaponTable = {}
+local islandTable = {}
+
+for i,v in pairs(plr.Backpack:GetChildren()) do
+    if v.ClassName == "Tool" and v.Name ~= "Defence" then
+        table.insert(weaponTable, v.Name)
+    end
+end
+
+for i,v in pairs(plr.Character:GetChildren()) do
+    if v.ClassName == "Tool" and v.Name ~= "Defence" then
+        table.insert(weaponTable, v.Name)
+    end
+end
+
+for i,v in pairs(wrk["__GAME"]["__SpawnPoints"]:GetChildren()) do
+    table.insert(islandTable,v.Name)
+end
+
+
+local remoteEvent = bridgeModul.CreateBridge("REMOTE_EVENT")
+local attackEvent = bridgeModul.CreateBridge("ATTACK_EVENT2")
+local toolEvent = bridgeModul.CreateBridge("TOOL_EVENT2")
+
+
+function combatwithMob(weapon, mob)
+    if mob ~= nil and weapon ~= nil then
+        attackEvent:Fire(mob, weapon)
+        if weapon.Name ~= "Light" then
+            toolEvent:Fire("skillsControl", weapon.Name, "Z", "Release", mob.NpcModel.HumanoidRootPart.Position)
+        end
+        toolEvent:Fire("skillsControl", weapon.Name, "X", "Release", mob.NpcModel.HumanoidRootPart.Position)
+        toolEvent:Fire("skillsControl", weapon.Name, "V", "Release", mob.NpcModel.HumanoidRootPart.Position)
+        toolEvent:Fire("skillsControl", weapon.Name, "B", "Release", mob.NpcModel.HumanoidRootPart.Position)
+    end
+end
+
+function statFarm(weapon, df)
+    if weapon ~= nil and df ~= nil then
+        toolEvent:Fire("Combat", 1, false, weapon, weapon:GetAttribute("Type"))
+        toolEvent:Fire("Defence", df, "Defence")
+    end
+end
+
+function getLevel()
+    if plr ~= nil then
+        if plr.leaderstats ~= nil then
+            if plr.leaderstats.Level ~= nil then
+                return plr.leaderstats.Level.Value
+            end
+        end
+    end
+    return nil
+end
+
+function getQuest(level)
+    local quest = indexQuestModul
+    if level == quest[1].Level or level <= quest[2].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest01.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 1)
+    elseif level == quest[2].Level or level <= quest[3].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest02.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 2)
+    elseif level == quest[3].Level or level <= quest[4].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest03.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 3)
+    elseif level == quest[4].Level or level <= quest[5].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest04.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 4)
+    elseif level == quest[5].Level or level <= quest[6].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest05.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 5)
+    elseif level == quest[6].Level or level <= quest[7].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest06.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 6)
+    elseif level == quest[7].Level or level <= quest[8].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest07.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 7)
+    elseif level == quest[8].Level or level <= quest[9].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest08.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 8)
+    elseif level == quest[9].Level or level <= quest[10].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest09.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 9)
+    elseif level == quest[10].Level or level <= quest[11].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest10.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 10)
+    elseif level == quest[11].Level or level <= quest[12].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest11.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 11)
+    elseif level == quest[12].Level or level <= quest[13].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest12.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 12)
+    elseif level == quest[13].Level or level <= quest[14].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest13.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 13)
+    elseif level == quest[14].Level or level <= quest[15].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest14.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 14)
+    elseif level == quest[15].Level or level <= quest[16].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest15.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 15)
+    elseif level == quest[16].Level or level <= quest[17].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest17.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 16)
+    elseif level == quest[17].Level or level <= quest[18].Level - 1 then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest16.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 17)
+    elseif level >= quest[18].Level then
+        plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest18.HumanoidRootPart.CFrame
+        remoteEvent:Fire("GetQuest", 18)
+    end
+end
+
+function getId()
+    if plr.leaderstats.Currents:GetAttribute("Quest") == 1 then
+        getgenv().id = 1
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 2 then
+        getgenv().id = 1
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 3 then
+        getgenv().id = 1
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 4 then
+        getgenv().id = 2
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 5 then
+        getgenv().id = 2
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 6 then
+        getgenv().id = 2
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 7 then
+        getgenv().id = 3
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 8 then
+        getgenv().id = 3
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 9 then
+        getgenv().id = 3
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 10 then
+        getgenv().id = 4
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 11 then
+        getgenv().id = 4
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 12 then
+        getgenv().id = 4
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 13 then
+        getgenv().id = 5
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 14 then
+        getgenv().id = 5
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 15 then
+        getgenv().id = 5
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 16 then
+        getgenv().id = 6
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 17 then
+        getgenv().id = 6
+    elseif plr.leaderstats.Currents:GetAttribute("Quest") == 18 then
+        getgenv().id = 6
+    end
+end
+    
+runs.Heartbeat:Connect(function()
+    if plr.Character then
+        if plr.Character:WaitForChild("Head"):FindFirstChildOfClass("BillboardGui") then
+            plr.Character:WaitForChild("Head"):FindFirstChildOfClass("BillboardGui"):Destroy()
+        end
+    end
+end)
+
+runs.Heartbeat:Connect(function()
+    for i,x in pairs(plr.Character:GetChildren()) do
+        if x.Parent.Name == plr.Name then
+            if x.Parent:FindFirstChildOfClass("Tool") then
+                getgenv().equiptool = true
+            else
+                getgenv().equiptool = false
+            end
+        end
+        if x.ClassName == "Tool" then
+            if x.Name == "Defence" then
+                getgenv().defence = x
+            end
+            if x.Name == getgenv().weaponname then
+                getgenv().weapon = x
+            end
+        end
+    end
+    if not getgenv().equiptool and getgenv().autofarmquest or not getgenv().equiptool and getgenv().gf or not getgenv().equiptool and getgenv().sf then
+        if getgenv().weaponname and getgenv().weaponname ~= "Select A Weapon Pls!" and getgenv().weaponname ~= nil then
+            plr.Character.Humanoid:EquipTool(plr.Backpack[getgenv().weaponname])
+        end
+        for i,z in pairs(plr.Backpack:GetChildren()) do
+            if z.Name == "Defence" then
+                z.Parent = plr.Character
+            end
+        end
+    end
+    if plr.Character then
+        if plr.Character:FindFirstChild("HumanoidRootPart") then
+            plr.Character.HumanoidRootPart:WaitForChild("Att1"):Destroy()
+        end
+    end
+end)
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "RSsC4ATvkj", 
+        	RememberJoins = true
+        },
+
+})
+
+local Tab = Window:CreateTab("Main")
+
+local Section = Tab:CreateSection("Farming")
+
+    Tab:CreateToggle({
+	Name = "Auto Punch",
+	CurrentValue = false,
+	Flag = "Toggle2", 
+	Callback = function(Value)
+        a = Value
+        while a do task.wait()
+        vu:Button1Down(Vector2.new(1000,1000),workspace.CurrentCamera.CFrame)
+wait(0.1)
+vu:Button1Up(Vector2.new(1000,1000),workspace.CurrentCamera.CFrame)
+    end
+	end,
+})
+
+    Tab:CreateDropdown({
+	Name = "Weapons",
+	Options = weaponTable,
+	CurrentOption = "Select Weapon",
+	Flag = "Dropdown1", 
+	Callback = function(selected)
+        getgenv().weaponname = selected
+	end,
+})
+
+    Tab:CreateToggle({
+	Name = "Auto Level",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(bool)
+        getgenv().autofarmquest = bool
+
+        if bool then
+            if wrk:FindFirstChild("Effects") then
+                wrk.Effects:Destroy()
+            end    
+            for i,v in pairs(plr.Character:GetChildren()) do
+                if v.ClassName == "Tool" then
+                    v.Parent = plr.Backpack
+                end
+            end
+        else
+            if not wrk:FindFirstChild("Effects") then
+                local x = Instance.new("Folder", wrk)
+                x.Name = "Effects"   
+            end
+        end
+
+        wait(0.5)
+
+        if not wrk:FindFirstChild("Effects") then
+            spawn(function()
+                while task.wait() do
+                    if getgenv().autofarmquest then
+                        if plr.leaderstats.Currents:GetAttribute("Quest") == "" then
+                            getQuest(getLevel())
+                            if getgenv().equiptool then
+                                statFarm(getgenv().weapon, getgenv().defence)
+                            end
+                        else
+                            if getgenv().weaponname and getgenv().weaponname ~= "Select A Weapon Pls!" and getgenv().weaponname ~= nil then
+                                getId()
+                                if getgenv().equiptool then
+                                    statFarm(getgenv().weapon, getgenv().defence)
+                                end
+                                for i,x in pairs(wrk.__GAME.__Mobs:GetChildren()) do
+                                    if string.match(x.Name, getgenv().id) then
+                                        for i,v in pairs(x:GetChildren()) do
+                                            if plr.leaderstats.Currents:GetAttribute("Quest") == 1 then
+                                                if string.find(v.Name, "Bandit") and not string.find(v.Name, "StrongBandit") and not string.find(v.Name, "BanditLeader") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 2 then
+                                                if string.find(v.Name, "StrongBandit") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 3 then
+                                                if string.find(v.Name, "BanditLeader") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest02.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 2)
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 4 then
+                                                if string.find(v.Name, "Monkey") and not string.find(v.Name, "MonkeyQueen") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 5 then
+                                                if string.find(v.Name, "Gorilla") and not string.find(v.Name, "KingGorilla") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 6 then
+                                                if string.find(v.Name, "KingGorilla") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest05.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 5)
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 7 then
+                                                if string.find(v.Name, "Clown") and not string.find(v.Name, "KillerClown") and not string.find(v.Name, "ClownKing") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 8 then
+                                                if string.find(v.Name, "KillerClown") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 9 then
+                                                if string.find(v.Name, "ClownKing") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest08.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 8)
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 10 then
+                                                if string.find(v.Name, "Marine") and not string.find(v.Name, "MarineOfficial") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 11 then
+                                                if string.find(v.Name, "MarineOfficial") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 12 then
+                                                if string.find(v.Name, "Lorgan") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest11.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 11)
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 13 then
+                                                if string.find(v.Name, "CatPirate") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 14 then
+                                                if string.find(v.Name, "MansionGuard") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 15 then
+                                                if string.find(v.Name, "Buros") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest14.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 14)
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 16 then
+                                                if string.find(v.Name, "DonPirate") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 17 then
+                                                if string.find(v.Name, "Peal") or string.find(v.Name, "Gin") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            elseif plr.leaderstats.Currents:GetAttribute("Quest") == 18 then
+                                                if string.find(v.Name, "Krieg") then
+                                                    if v:FindFirstChild("NpcModel")and v:FindFirstChild("NpcHealth") then
+                                                        if v.NpcModel:FindFirstChild("HumanoidRootPart") and string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] ~= "0" then
+                                                            if getgenv().autofarmquest then
+                                                                repeat task.wait()
+                                                                    if getgenv().equiptool then 
+                                                                        plr.Character:WaitForChild("HumanoidRootPart").CFrame = v.NpcModel.HumanoidRootPart.CFrame
+                                                                        statFarm(getgenv().weapon, getgenv().defence)
+                                                                    end
+                                                                until not getgenv().autofarmquest or string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" or plr.leaderstats.Currents:GetAttribute("Quest") == ""
+                                                            end
+                                                        elseif string.split(v.NpcHealth.ViewerFrame.Frame.HealthText.Text, "/")[1] == "0" then
+                                                            plr.Character.HumanoidRootPart.CFrame = wrk["__GAME"]["__Quests"].Quest16.HumanoidRootPart.CFrame
+                                                            remoteEvent:Fire("GetQuest", 17)
+                                                        end
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+	end,
+})
+
+    Tab:CreateToggle({
+	Name = "Auto Collect Fruit",
+	CurrentValue = false,
+	Flag = "Toggle3", 
+	Callback = function(Value)
+        aa = Value
+        while aa do task.wait()
+            pcall(function()
+                for i, v in pairs(workspace:GetDescendants()) do
+                    if v:IsA "Model" and v:FindFirstChild("Eat") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,game)
+                    end
+                end
+            end)
+        end
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Auto Collect Chests",
+	CurrentValue = false,
+	Flag = "Toggle4", 
+	Callback = function(Value)
+        aaa = Value
+        while aaa do task.wait()
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                    if v.Name == "Hastes" and v.Parent.Name == "Baixo" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,game)
+                    end        
+                end
+            end)
+        end
+	end,
+})
+
+
+Rayfield:LoadConfiguration()
