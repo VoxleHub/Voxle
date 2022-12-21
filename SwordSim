@@ -1,0 +1,101 @@
+local MOB = {}
+
+for i, v in pairs(game:GetService("Workspace").Live.NPCs.Client:GetChildren()) do
+    if v:IsA "Model" then
+		if not table.find(MOB, tostring(v.HumanoidRootPart.NPCTag.NameLabel.Text)) then
+            table.insert(MOB, tostring(v.HumanoidRootPart.NPCTag.NameLabel.Text))
+        end
+    end
+end
+local function getClosest()
+    local dist, thing = math.huge
+    for i, v in next, game:GetService("Workspace").Live.NPCs.Client:GetChildren() do
+        if v:IsA("Model") then
+            local mag =
+                (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+getgenv().SecureMode = true
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "RSsC4ATvkj", 
+        	RememberJoins = true
+        },
+
+})
+
+local Tab = Window:CreateTab("Main")
+
+local Section = Tab:CreateSection("Farming")
+
+ 	Tab:CreateToggle({
+	Name = "Kill Aura",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+		a = Value
+		while a do task.wait()
+			local args = {
+				[1] = getClosest().Name
+			}
+
+			game:GetService("ReplicatedStorage").Packages.Knit.Services.ClickService.RF.Click:InvokeServer(unpack(args))
+		end
+	end,
+})
+
+Tab:CreateDropdown({
+	Name = "Select Mob",
+	Options = MOB,
+	CurrentOption = "Mob List",
+	Flag = "Dropdown1", 
+	Callback = function(Value)
+        getgenv().mob = Value
+	end,
+})
+local function getClosestMOB()
+    local dist, thing = math.huge
+    for i, v in next, game:GetService("Workspace").Live.NPCs.Client:GetChildren() do
+        if v:IsA("Model") and v.HumanoidRootPart.NPCTag.NameLabel.Text == mob then
+            local mag =
+                (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
+Tab:CreateToggle({
+	Name = "Farm Mob",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+        aa = Value
+        while aa do task.wait()
+            pcall(function()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosestMOB().HumanoidRootPart.CFrame
+            end)
+        end
+	end,
+})
+Rayfield:LoadConfiguration()
