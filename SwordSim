@@ -135,9 +135,21 @@ Tab:CreateToggle({
 	end,
 })
 
+Tab:CreateButton({
+	Name = "Refresh mobs",
+	Callback = function()
+        table.clear(MOB)
+		for i, v in pairs(game:GetService("Workspace").Live.NPCs.Client:GetChildren()) do
+            if v:IsA "Model" then
+                if not table.find(MOB, tostring(v.HumanoidRootPart.NPCTag.NameLabel.Text)) then
+                    table.insert(MOB, tostring(v.HumanoidRootPart.NPCTag.NameLabel.Text))
+                    drop:Refresh(MOB, "Mob List")
+                end
+            end
+        end
+	end,
+})
 
 
-
-local Label = Tab:CreateLabel("Re-Execute near the mob you want in dropdown")
 
 Rayfield:LoadConfiguration()
