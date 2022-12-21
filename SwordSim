@@ -45,6 +45,18 @@ local Tab = Window:CreateTab("Main")
 
 local Section = Tab:CreateSection("Farming")
 
+Tab:CreateToggle({
+	Name = "Auto Click",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+		aaa = Value
+		while aaa do task.wait()
+            game:GetService("ReplicatedStorage").Packages.Knit.Services.ClickService.RF.Click:InvokeServer()
+		end
+	end,
+})
+
  	Tab:CreateToggle({
 	Name = "Kill Aura",
 	CurrentValue = false,
