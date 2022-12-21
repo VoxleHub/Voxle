@@ -98,4 +98,6 @@ Tab:CreateToggle({
         end
 	end,
 })
+local Label = Tab:CreateLabel("Re-Execute near the mob you want in dropdown")
+
 Rayfield:LoadConfiguration()
