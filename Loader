@@ -21,6 +21,7 @@ if Supported1 ~= false then
 end
 local Games = {
     [11445923563] = "Voxle/main/OneFruit";
+    [11040063484] = "Voxle/main/SwordSim";
 
 
 }
