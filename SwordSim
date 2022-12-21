@@ -88,11 +88,13 @@ local Section = Tab:CreateSection("Farming")
 	Callback = function(Value)
 		a = Value
 		while a do task.wait()
+            pcall(function()
 			local args = {
 				[1] = getClosest().Name
 			}
 
 			game:GetService("ReplicatedStorage").Packages.Knit.Services.ClickService.RF.Click:InvokeServer(unpack(args))
+        end)
 		end
 	end,
 })
@@ -150,6 +152,19 @@ Tab:CreateButton({
 	end,
 })
 
+Tab:CreateToggle({
+	Name = "Farm Nearest Mob",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+        aaaaa = Value
+        while aaaaa do task.wait()
+            pcall(function()
+                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(5,0,0),50)
+            end)
+        end
+	end,
+})
 
 
 Rayfield:LoadConfiguration()
