@@ -84,7 +84,7 @@ local Section = Tab:CreateSection("Farming")
  	Tab:CreateToggle({
 	Name = "Kill Aura",
 	CurrentValue = false,
-	Flag = "Toggle1", 
+	Flag = "Toggle3", 
 	Callback = function(Value)
 		a = Value
 		while a do task.wait()
@@ -94,6 +94,7 @@ local Section = Tab:CreateSection("Farming")
 			}
 
 			game:GetService("ReplicatedStorage").Packages.Knit.Services.ClickService.RF.Click:InvokeServer(unpack(args))
+            game:GetService("Workspace").Live.Pickups.Currency.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         end)
 		end
 	end,
@@ -131,7 +132,7 @@ Tab:CreateToggle({
         aa = Value
         while aa do task.wait()
             pcall(function()
-                moveto(getClosestMOB().HumanoidRootPart.CFrame + Vector3.new(5,0,0),50)
+                moveto(getClosestMOB().HumanoidRootPart.CFrame + Vector3.new(5,0,0),200)
             end)
         end
 	end,
@@ -155,16 +156,78 @@ Tab:CreateButton({
 Tab:CreateToggle({
 	Name = "Farm Nearest Mob",
 	CurrentValue = false,
-	Flag = "Toggle1", 
+	Flag = "Toggle2", 
 	Callback = function(Value)
         aaaaa = Value
         while aaaaa do task.wait()
             pcall(function()
-                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(5,0,0),50)
+                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(5,0,0),200)
             end)
         end
 	end,
 })
 
+local Tab = Window:CreateTab("Misc")
+
+Tab:CreateButton({
+	Name = "Claim Rewards",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 1"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 2"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 3"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 4"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 5"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Free Ticket 6"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Chest 1"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Chest 2"))
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.ChestService.RF.ClaimChest:InvokeServer(("Chest 3"))
+
+
+	end,
+})
+
+Tab:CreateDropdown({
+	Name = "Select Zone",
+	Options = 
+    {"Dark Forest",
+    "Skull Cove",
+    "Demon Hill",
+    "Polar Tundra",
+    "Aether City",
+    "Underworld",
+    "Ancient Sands",
+    "Enchanted Woods",
+    "Mystic Mines"},
+	CurrentOption = "Zone List",
+	Flag = "Dropdown2", 
+	Callback = function(Value)
+        getgenv().zone = Value
+	end,
+})
+
+Tab:CreateButton({
+	Name = "Teleport",
+	Callback = function()
+        if zone == "Dark Forest" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(326.855927, 149.584839, -0.997089803, 0.669812739, -3.11749773e-08, 0.742530048, 4.49429436e-08, 1, 1.443201e-09, -0.742530048, 3.24048131e-08, 0.669812739)
+        elseif zone == "Skull Cove" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2234, 149, -574)
+        elseif zone == "Demon Hill" then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3948, 149, -383)
+        elseif zone == "Polar Tundra" then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5965, 149, -538)
+        elseif zone == "Aether City" then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8953, 608, -502)
+        elseif zone == "Underworld" then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13588, 154, 86)
+        elseif zone == "Ancient Sands" then 
+
+        elseif zone == "Enchanted Woods" then 
+            
+        elseif zone == "Mystic Mines" then 
+
+        end
+	end,
+})
 
 Rayfield:LoadConfiguration()
