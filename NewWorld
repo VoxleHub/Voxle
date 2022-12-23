@@ -166,6 +166,28 @@ Tab:CreateToggle({
         while aa do task.wait()
             pcall(function()
                 moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(0,0,0),200)
+                if mob == "Thief" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("1"):FindFirstChild("1"),
+                        [2] = "Level 1"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Bandit" then
+                local args = {
+                    [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("1"):FindFirstChild("1"),
+                    [2] = "Level 10"
+                }
+
+                game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Bandit Boss" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("1"):FindFirstChild("1"),
+                        [2] = "Level 25"
+                    }
+    
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                end
             end)
         end
 	end,
