@@ -273,13 +273,6 @@ Tab:CreateToggle({
 	end,
 })
 
-Tab:CreateButton({
-	Name = "Serverhop",
-	Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/noobhosting/noobscript/main/AutoServerHop.lua'))()
-
-	end,
-})
 
 local Tab = Window:CreateTab("Teleports")
     Tab:CreateDropdown({
