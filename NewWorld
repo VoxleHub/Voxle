@@ -1,3 +1,4 @@
+local vu = game:GetService("VirtualUser")
 
 Plr = game.Players.LocalPlayer
 local function getFRUIT()
@@ -120,6 +121,21 @@ local Tab = Window:CreateTab("Main")
 
 local Section = Tab:CreateSection("Farming")
 
+
+Tab:CreateToggle({
+	Name = "Normal Auto Attack",
+	CurrentValue = false,
+	Flag = "Toggle8", 
+	Callback = function(Value)
+		aaaaa = Value
+            while aaaaa do task.wait()
+                vu:Button1Down(Vector2.new(1000, 1000), workspace.CurrentCamera.CFrame)
+                wait(0.1)
+                vu:Button1Up(Vector2.new(1000, 1000), workspace.CurrentCamera.CFrame)
+		end
+	end,
+})
+    Tab:CreateLabel("Kill Aura only works with Combat")
  	Tab:CreateToggle({
 	Name = "Kill Aura",
 	CurrentValue = false,
@@ -245,6 +261,91 @@ Tab:CreateToggle({
                     }
 
                     game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Marine Recruit" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("6"):FindFirstChild("6"),
+                        [2] = "Level 350"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Tashi" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("6"):FindFirstChild("6"),
+                        [2] = "Level 400"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Monkey" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("7"):FindFirstChild("7"),
+                        [2] = "Level 450"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Gorilla" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("7"):FindFirstChild("7"),
+                        [2] = "Level 500"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "King Gorilla" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("7"):FindFirstChild("7"),
+                        [2] = "Level 550"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Marine Grunt" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("8"):FindFirstChild("8"),
+                        [2] = "Level 600"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Marine Captain" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("8"):FindFirstChild("8"),
+                        [2] = "Level 650"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Satyr" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("9"):FindFirstChild("9"),
+                        [2] = "Level 700"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Minotaur" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("9"):FindFirstChild("9"),
+                        [2] = "Level 750"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Elite Marine" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("10"):FindFirstChild("10"),
+                        [2] = "Level 800"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Vice Admiral" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("10"):FindFirstChild("10"),
+                        [2] = "Level 850"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Ice Admiral" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("10"):FindFirstChild("10"),
+                        [2] = "Level 900"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+
                 end
             end)
         end
