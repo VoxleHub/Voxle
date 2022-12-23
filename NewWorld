@@ -236,7 +236,7 @@ Tab:CreateToggle({
 	end,
 })
 Tab:CreateToggle({
-	Name = "Farm Fruit",
+	Name = "Tp to Fruit",
 	CurrentValue = false,
 	Flag = "Toggle1", 
 	Callback = function(Value)
@@ -255,6 +255,14 @@ Tab:CreateToggle({
                 end
             end)
         end
+	end,
+})
+
+Tab:CreateButton({
+	Name = "Serverhop",
+	Callback = function()
+        game:GetService("TeleportService"):Teleport(6918802270, game:GetService("Players").LocalPlayer)
+
 	end,
 })
 
