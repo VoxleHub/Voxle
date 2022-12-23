@@ -256,8 +256,12 @@ local Tab = Window:CreateTab("Teleports")
 Tab:CreateButton({
 	Name = "Teleport to Island",
 	Callback = function()
-        moveto(game:GetService("Workspace")["Npc_Workspace"]["Spawn Setters"][island].Clicker.CFrame + Vector3.new(0,0,0),200)
+        local args = {
+            [1] = island
+        }
 
+        game:GetService("ReplicatedStorage").Replication.ClientEvents.SetSpawnPoint:FireServer(unpack(args))
+        game.Players.LocalPlayer.Character.Humanoid.Health = 0
 	end,
 })
 
