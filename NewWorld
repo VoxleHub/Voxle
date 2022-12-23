@@ -187,6 +187,20 @@ Tab:CreateToggle({
                     }
     
                     game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Pirate Clown" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("2"):FindFirstChild("2"),
+                        [2] = "Level 40"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Clown Boss" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("2"):FindFirstChild("2"),
+                        [2] = "Level 60"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
                 end
             end)
         end
