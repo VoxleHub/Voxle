@@ -193,7 +193,7 @@ Tab:CreateToggle({
         aaaa = Value
         while aaaa do task.wait()
             pcall(function()
-                moveto(getCHEST().Hitbox.CFrame + Vector3.new(0,0,0),200)
+                moveto(getCHEST().Hitbox.CFrame + Vector3.new(0,0,0),1000)
             end)
         end
 	end,
@@ -206,7 +206,7 @@ Tab:CreateToggle({
         aaaa = Value
         while aaaa do task.wait()
             pcall(function()
-                moveto(getFRUIT().Handle.CFrame + Vector3.new(0,0,0),200)
+                moveto(getFRUIT().Handle.CFrame + Vector3.new(0,0,0),1000)
                 for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
                     if v:IsA("Part") or v:IsA("MeshPart") then
                         if game:GetService("Players").LocalPlayer:DistanceFromCharacter(v.Position) <= 50 then
@@ -330,5 +330,6 @@ Tab:CreateButton({
         end
 	end,
 })
+
 
 Rayfield:LoadConfiguration()
