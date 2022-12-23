@@ -332,7 +332,8 @@ Tab:CreateToggle({
         while aaa do task.wait()
             for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                 if v.name == weapon then
-                    v.Parent = game.Players.LocalPlayer.Character            
+                    v.Parent = game.Players.LocalPlayer.Character        
+                    task.wait(5)    
                 end
             end
         end
