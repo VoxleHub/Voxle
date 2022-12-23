@@ -193,7 +193,7 @@ Tab:CreateToggle({
         aaaa = Value
         while aaaa do task.wait()
             pcall(function()
-                moveto(getCHEST().Hitbox.CFrame + Vector3.new(0,0,0),1000)
+                moveto(getCHEST().Hitbox.CFrame + Vector3.new(0,0,0),500)
             end)
         end
 	end,
