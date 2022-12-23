@@ -1,3 +1,4 @@
+Plr = game.Players.LocalPlayer
 local function getFRUIT()
     local dist, thing = math.huge
     for i, v in next, game:GetService("Workspace"):GetChildren() do
@@ -348,12 +349,13 @@ Tab:CreateToggle({
 	Callback = function(Value)
         aaa = Value
         while aaa do task.wait()
-            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if v.name == weapon then
-                    v.Parent = game.Players.LocalPlayer.Character        
-                    task.wait(5)    
+            pcall(function()
+                if Plr.Backpack:FindFirstChild(weapon) and Plr.Character:FindFirstChild(weapon) == nil then
+                    local tool = Plr.Backpack:FindFirstChild(weapon)
+                    Plr.Character.Humanoid:EquipTool(tool)      
+                    task.wait(5)   
                 end
-            end
+            end)
         end
 	end,
 })
