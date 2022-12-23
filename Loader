@@ -22,6 +22,7 @@ end
 local Games = {
     [11445923563] = "Voxle/main/OneFruit";
     [11040063484] = "Voxle/main/SwordSim";
+    [6918802270] = "Voxle/main/NewWorld";
 
 
 }
