@@ -226,7 +226,7 @@ Tab:CreateToggle({
                     game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
                 elseif mob == "Bomb Boss" then
                     local args = {
-                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("3"):FindFirstChild("3"),
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("4"):FindFirstChild("4"),
                         [2] = "Level 200"
                     }
 
