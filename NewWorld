@@ -1,3 +1,4 @@
+
 Plr = game.Players.LocalPlayer
 local function getFRUIT()
     local dist, thing = math.huge
@@ -275,7 +276,7 @@ Tab:CreateToggle({
 Tab:CreateButton({
 	Name = "Serverhop",
 	Callback = function()
-        game:GetService("TeleportService"):Teleport(6918802270, game:GetService("Players").LocalPlayer)
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/noobhosting/noobscript/main/AutoServerHop.lua'))()
 
 	end,
 })
@@ -357,7 +358,7 @@ Tab:CreateButton({
 	Name = "Select Weapon",
 	Options = BACK,
 	CurrentOption = "Weapon List",
-	Flag = "Dropdown1", 
+	Flag = "Dropdown4", 
 	Callback = function(Value)
         getgenv().weapon = Value
 	end,
@@ -396,5 +397,35 @@ Tab:CreateButton({
 	end,
 })
 
+    Tab:CreateDropdown({
+	Name = "Select Stat",
+	Options = {"Combat",
+    "Defense",
+    "Sword",
+    "Fruit"},
+	CurrentOption = "Stat List",
+	Flag = "Dropdown6", 
+	Callback = function(Value)
+        getgenv().stat = Value
+	end,
+})
+
+
+Tab:CreateToggle({
+	Name = "Auto Stat",
+	CurrentValue = false,
+	Flag = "Toggle5", 
+	Callback = function(Value)
+        aaa = Value
+        while aaa do task.wait()
+            local args = {
+                [1] = stat,
+                [2] = 1
+            }
+
+            game:GetService("ReplicatedStorage").Replication.ClientEvents.Stats_Event:FireServer(unpack(args))
+        end
+	end,
+})
 
 Rayfield:LoadConfiguration()
