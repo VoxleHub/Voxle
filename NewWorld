@@ -561,7 +561,7 @@ Tab:CreateToggle({
                     if v:IsA("Tool") then
                         Rayfield:Notify({
                             Title = "Devil Fruit Found",
-                            Content = v.Name.. "has been found",
+                            Content = v.Name .. "has been found",
                             Duration = 6.5,
                             Image = 4483362458,
                             Actions = { -- Notification Buttons
