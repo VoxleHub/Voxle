@@ -101,7 +101,7 @@ local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-I
 getgenv().SecureMode = true
 
 local Window = Rayfield:CreateWindow({
-	Name = "Voxle Hub",
+	Name = "Voxle Hub V9jg4gFXzg",
 	LoadingTitle = "Voxle Hub",
 	LoadingSubtitle = "by Voxle",
 	ConfigurationSaving = {
