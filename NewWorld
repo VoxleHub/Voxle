@@ -268,7 +268,7 @@ Tab:CreateToggle({
                     }
 
                     game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
-                elseif mob == "Tashi" then
+                elseif mob == "Tashii" then
                     local args = {
                         [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("6"):FindFirstChild("6"),
                         [2] = "Level 400"
