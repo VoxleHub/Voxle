@@ -550,4 +550,35 @@ Tab:CreateToggle({
 	end,
 })
 
+Tab:CreateToggle({
+	Name = "Devil Fruit Notifier",
+	CurrentValue = false,
+	Flag = "Toggle4", 
+	Callback = function(Value)
+        b = Value
+        while b do task.wait()
+            for i, v in next, game:GetService("Workspace"):GetChildren() do
+                    if v:IsA("Tool") then
+                        Rayfield:Notify({
+                            Title = "Devil Fruit Found",
+                            Content = v.Name.. "has been found",
+                            Duration = 6.5,
+                            Image = 4483362458,
+                            Actions = { -- Notification Buttons
+                                Ignore = {
+                                    Name = "Okay!",
+                                    Callback = function()
+                                        print("The user tapped Okay!")
+                                    end
+                                },
+                            },
+                        })
+                        task.wait(20)
+                end
+            end
+        end
+	end,
+})
+
+
 Rayfield:LoadConfiguration()
