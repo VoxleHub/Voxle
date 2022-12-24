@@ -449,26 +449,26 @@ Tab:CreateButton({
             moveto(game:GetService("Workspace")["Npc_Workspace"].Buso["1"].Clicker.CFrame
             + Vector3.new(0,0,0),200)
         elseif npc == "ObsHaki" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"].ObsHaki["1"].Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"].ObsHaki["1"].Clicker.CFrame + Vector3.new(0,0,0),1000)
 
         elseif npc == "Black Leg" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"].Geppo["Black Leg"].Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"].Geppo["Black Leg"].Clicker.CFrame + Vector3.new(0,0,0),1000)
 
 
         elseif npc == "Flashstep 1" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"].FlashStep["1"].Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"].FlashStep["1"].Clicker.CFrame + Vector3.new(0,0,0),1000)
 
         elseif npc == "Flashstep 2" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"].FlashStep["2"].Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"].FlashStep["2"].Clicker.CFrame + Vector3.new(0,0,0),1000)
 
         elseif npc == "Pipe" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"].Pipe.Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"].Pipe.Clicker.CFrame + Vector3.new(0,0,0),1000)
 
         elseif npc == "Katana" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"].Katana.Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"].Katana.Clicker.CFrame + Vector3.new(0,0,0),1000)
 
         elseif npc == "Soul Cane" then
-            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"]["Soul Cane"].Clicker.CFrame + Vector3.new(0,0,0),200)
+            moveto(game:GetService("Workspace")["Npc_Workspace"]["Sword Sellers"]["Soul Cane"].Clicker.CFrame + Vector3.new(0,0,0),1000)
             
         end
 	end,
