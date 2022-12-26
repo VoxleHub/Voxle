@@ -178,12 +178,26 @@ end
 Tab:CreateToggle({
 	Name = "Farm Mob",
 	CurrentValue = false,
-	Flag = "Toggle1", 
+	Flag = "Toggle9", 
+	Callback = function(Value)
+        c = Value
+        while c do task.wait()
+            pcall(function()
+                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(0,0,0),200)
+
+            end)
+        end
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Auto Quest",
+	CurrentValue = false,
+	Flag = "Toggle2", 
 	Callback = function(Value)
         aa = Value
         while aa do task.wait()
             pcall(function()
-                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(0,0,0),200)
                 if mob == "Thief" then
                     local args = {
                         [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("1"):FindFirstChild("1"),
@@ -382,12 +396,12 @@ Tab:CreateToggle({
 Tab:CreateToggle({
 	Name = "Tp to Fruit",
 	CurrentValue = false,
-	Flag = "Toggle1", 
+	Flag = "Toggle6", 
 	Callback = function(Value)
         aaaa = Value
         while aaaa do task.wait()
             pcall(function()
-                moveto(getFRUIT().Handle.CFrame + Vector3.new(0,0,0),1000)
+                moveto(getFRUIT().Handle.CFrame + Vector3.new(0,0,0),500)
                 for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
                     if v:IsA("Part") or v:IsA("MeshPart") then
                         if game:GetService("Players").LocalPlayer:DistanceFromCharacter(v.Position) <= 50 then
@@ -490,7 +504,7 @@ Tab:CreateButton({
 Tab:CreateToggle({
 	Name = "Auto Equip",
 	CurrentValue = false,
-	Flag = "Toggle5", 
+	Flag = "Toggle7", 
 	Callback = function(Value)
         aaa = Value
         while aaa do task.wait()
