@@ -1,3 +1,6 @@
+local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteMan420/bub/main/chub"))()
+ESP.Players = false
+ESP.Boxes = false
 local vu = game:GetService("VirtualUser")
 
 Plr = game.Players.LocalPlayer
@@ -183,7 +186,7 @@ Tab:CreateToggle({
         c = Value
         while c do task.wait()
             pcall(function()
-                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(0,0,0),200)
+                moveto(getClosest().HumanoidRootPart.CFrame + Vector3.new(0,0,0),250)
 
             end)
         end
@@ -389,6 +392,15 @@ Tab:CreateToggle({
         while aaaa do task.wait()
             pcall(function()
                 moveto(getCHEST().Hitbox.CFrame + Vector3.new(0,0,0),500)
+                for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                    if v:IsA("Part") or v:IsA("MeshPart") then
+                        if game:GetService("Players").LocalPlayer:DistanceFromCharacter(v.Position) <= 50 then
+                            if v:FindFirstChild("ProximityPrompt") then
+                                fireproximityprompt(v.ProximityPrompt)
+                            end
+                        end
+                    end
+                end
             end)
         end
 	end,
@@ -487,6 +499,7 @@ Tab:CreateButton({
         end
 	end,
 })
+
 
     Tab = Window:CreateTab("Settings")
 
@@ -593,6 +606,124 @@ Tab:CreateToggle({
         end
 	end,
 })
+local Tab = Window:CreateTab("Local Player")
+local Slider = Tab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {0, 500},
+	Increment = 10,
+	Suffix = "WalkSpeed",
+	CurrentValue = 30,
+	Flag = "Slider1", 
+	Callback = function(Value)
+        getgenv().speed = Value
+	end,
+})
 
+Tab:CreateToggle({
+	Name = "Toggle",
+	CurrentValue = false,
+	Flag = "Toggle17", 
+	Callback = function(Value)
+        c = Value
+        while c do
+            task.wait()
+            game.Players.LocalPlayer.Character["Sprint_Client"].WalkSpeed.Value = speed
+        end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Inf Jump",
+	CurrentValue = false,
+	Flag = "Toggle18", 
+	Callback = function(Value)
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if Value then
+                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+            end
+         end)
+	end,
+})
+for i, v in next, game:GetService("Workspace")["Npc_Workspace"].BoatSellers:GetChildren() do
+    if v:IsA("Model")  then
+ESP:AddObjectListener(v.Parent, {
+    Name = v.Name,
+    CustomName = v.Name,
+    Color = Color3.fromRGB(255,255,255),
+    IsEnabled = "Area"
+})
+
+end
+end
+for i, v in next, game:GetService("Workspace").Logic.Flags:GetChildren() do
+    if v:IsA("Model")  then
+ESP:AddObjectListener(v.Parent, {
+    Name = v.Name,
+    CustomName = v.Name,
+    Color = Color3.fromRGB(255,255,255),
+    IsEnabled = "Flag"
+})
+end
+end
+for i, v in next, game:GetService("Workspace"):GetDescendants() do
+    if v.Parent:IsA("Tool") and v.Name == "Handle" and v.Parent:FindFirstChild("Activate") then
+ESP:AddObjectListener(v.Parent, {
+    Name = v.Name,
+    CustomName = v.Parent.Name,
+    Color = Color3.fromRGB(255,255,255),
+    IsEnabled = "Fruit"
+})
+
+end
+end
+local Tab = Window:CreateTab("ESP")
+Tab:CreateToggle({
+	Name = "Toggle ESP",
+	CurrentValue = false,
+	Flag = "Toggle10", 
+	Callback = function(state)
+        ESP:Toggle(state)
+	end,
+})
+     Tab:CreateToggle({
+	Name = "Toggle Boxes",
+	CurrentValue = false,
+	Flag = "Toggle12", 
+	Callback = function(state)
+        ESP.Boxes = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Players",
+	CurrentValue = false,
+	Flag = "Toggle13", 
+	Callback = function(state)
+        ESP.Players = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Areas",
+	CurrentValue = false,
+	Flag = "Toggle14", 
+	Callback = function(state)
+        ESP.Area = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Flags",
+	CurrentValue = false,
+	Flag = "Toggle15", 
+	Callback = function(state)
+        ESP.Flag = state
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Toggle Fruit",
+	CurrentValue = false,
+	Flag = "Toggle16", 
+	Callback = function(state)
+        ESP.Fruit = state
+	end,
+})
 
 Rayfield:LoadConfiguration()
