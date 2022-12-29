@@ -648,7 +648,7 @@ for i, v in next, game:GetService("Workspace")["Npc_Workspace"].BoatSellers:GetC
 ESP:AddObjectListener(v.Parent, {
     Name = v.Name,
     CustomName = v.Name,
-    Color = Color3.fromRGB(255,255,255),
+    Color = Color3.fromRGB(221,160,221),
     IsEnabled = "Area"
 })
 
@@ -659,7 +659,7 @@ for i, v in next, game:GetService("Workspace").Logic.Flags:GetChildren() do
 ESP:AddObjectListener(v.Parent, {
     Name = v.Name,
     CustomName = v.Name,
-    Color = Color3.fromRGB(255,255,255),
+    Color = Color3.fromRGB(0,160,0),
     IsEnabled = "Flag"
 })
 end
@@ -669,7 +669,7 @@ for i, v in next, game:GetService("Workspace"):GetDescendants() do
 ESP:AddObjectListener(v.Parent, {
     Name = v.Name,
     CustomName = v.Parent.Name,
-    Color = Color3.fromRGB(255,255,255),
+    Color = Color3.fromRGB(255,255,0),
     IsEnabled = "Fruit"
 })
 
