@@ -701,7 +701,7 @@ Tab:CreateToggle({
 	end,
 })
 Tab:CreateToggle({
-	Name = "Toggle Areas",
+	Name = "Toggle Islands",
 	CurrentValue = false,
 	Flag = "Toggle14", 
 	Callback = function(state)
