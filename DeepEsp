@@ -1,5 +1,6 @@
 local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteMan420/bub/main/chub"))()
-
+ESP.Players = false
+ESP.Boxes = false
 local Waypoints = Instance.new("Folder", game.Workspace)
 Waypoints.Name = "Waypoints"
 
@@ -15,7 +16,7 @@ Area.Transparency = 1
 ESP:AddObjectListener(workspace.Waypoints, {
     Name = v.Name,
     CustomName = v.Name,
-    Color = Color3.fromRGB(255,255,255),
+    Color = Color3.fromRGB(221,160,221),
     IsEnabled = "Area"
 })
 
@@ -87,7 +88,7 @@ Tab:CreateToggle({
         ESP:AddObjectListener(v.Parent, {
             Name = v.Name,
             CustomName = v.Parent.Name,
-            Color = Color3.fromRGB(255,255,255),
+            Color = Color3.fromRGB(255,0,0),
             IsEnabled = "Mob"
         })
         ESP.Mob = state
@@ -105,7 +106,7 @@ Tab:CreateToggle({
         ESP:AddObjectListener(v.Parent, {
             Name = v.Name,
             CustomName = v.Parent.Name,
-            Color = Color3.fromRGB(255,255,255),
+            Color = Color3.fromRGB(0,0,255),
             IsEnabled = "Npc"
         })
         ESP.Npc = state
