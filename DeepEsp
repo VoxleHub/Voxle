@@ -1,0 +1,117 @@
+local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteMan420/bub/main/chub"))()
+
+local Waypoints = Instance.new("Folder", game.Workspace)
+Waypoints.Name = "Waypoints"
+
+
+for i, v in next, game:GetService("ReplicatedStorage").MarkerWorkspace.AreaMarkers:GetChildren() do
+    if v:IsA("Folder") and v:FindFirstChild("AreaMarker") then
+local Area = Instance.new("Part", game.Workspace.Waypoints)
+Area.Name = v.Name
+Area.Anchored = true
+Area.CanCollide = false
+Area.Position = v.AreaMarker.Position
+Area.Transparency = 1
+ESP:AddObjectListener(workspace.Waypoints, {
+    Name = v.Name,
+    CustomName = v.Name,
+    Color = Color3.fromRGB(255,255,255),
+    IsEnabled = "Area"
+})
+
+end
+end
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+getgenv().SecureMode = true
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "RSsC4ATvkj", 
+        	RememberJoins = true
+        },
+
+})
+
+local Tab = Window:CreateTab("Main", 4483362458)
+
+local Section = Tab:CreateSection("ESP")
+
+    Tab:CreateToggle({
+	Name = "Toggle ESP",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(state)
+        ESP:Toggle(state)
+	end,
+})
+     Tab:CreateToggle({
+	Name = "Toggle Boxes",
+	CurrentValue = false,
+	Flag = "Toggle2", 
+	Callback = function(state)
+        ESP.Boxes = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Players",
+	CurrentValue = false,
+	Flag = "Toggle3", 
+	Callback = function(state)
+        ESP.Players = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Areas",
+	CurrentValue = false,
+	Flag = "Toggle4", 
+	Callback = function(state)
+        ESP.Area = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Mobs",
+	CurrentValue = false,
+	Flag = "Toggle5", 
+	Callback = function(state)
+        for i, v in next, game:GetService("Workspace").Live:GetDescendants() do
+            if v.Name == "HumanoidRootPart" and v.Parent:FindFirstChild("HumanoidRootPart") and v.Parent:FindFirstChild("Target")then
+        ESP:AddObjectListener(v.Parent, {
+            Name = v.Name,
+            CustomName = v.Parent.Name,
+            Color = Color3.fromRGB(255,255,255),
+            IsEnabled = "Mob"
+        })
+        ESP.Mob = state
+    end
+end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle NPCs",
+	CurrentValue = false,
+	Flag = "Toggle6", 
+	Callback = function(state)
+        for i, v in next, game:GetService("Workspace").NPCs:GetDescendants() do
+            if v.Name == "HumanoidRootPart" then
+        ESP:AddObjectListener(v.Parent, {
+            Name = v.Name,
+            CustomName = v.Parent.Name,
+            Color = Color3.fromRGB(255,255,255),
+            IsEnabled = "Npc"
+        })
+        ESP.Npc = state
+    end
+end
+	end,
+})
+
+Rayfield:LoadConfiguration()
