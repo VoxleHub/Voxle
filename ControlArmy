@@ -2,7 +2,9 @@ local Object = {}
 
 for i, v in pairs(game:GetService("Workspace").Objects:GetChildren()) do
     if v:IsA "Model" then
+		if not table.find(Object, tostring(v)) then
         table.insert(Object, tostring(v))
+		end
     end
 end
 
