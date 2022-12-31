@@ -43,7 +43,7 @@ local Window = Rayfield:CreateWindow({
 
 })
 
-local Tab = Window:CreateTab("Main", 4483362458)
+local Tab = Window:CreateTab("Main")
 
 local Section = Tab:CreateSection("Farming")
 
@@ -114,3 +114,42 @@ Tab:CreateButton({
 		end
 	end,
 })
+local Tab = Window:CreateTab("Local Player")
+local Slider = Tab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {0, 500},
+	Increment = 10,
+	Suffix = "WalkSpeed",
+	CurrentValue = 30,
+	Flag = "Slider1", 
+	Callback = function(Value)
+        getgenv().speed = Value
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Toggle",
+	CurrentValue = false,
+	Flag = "Toggle17", 
+	Callback = function(Value)
+        c = Value
+        while c do
+        task.wait()
+        	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+        end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Inf Jump",
+	CurrentValue = false,
+	Flag = "Toggle18", 
+	Callback = function(Value)
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if Value then
+                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+            end
+         end)
+	end,
+})
+
+Rayfield:LoadConfiguration()
