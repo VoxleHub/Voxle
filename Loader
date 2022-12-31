@@ -23,6 +23,7 @@ local Games = {
     [11445923563] = "Voxle/main/OneFruit";
     [11040063484] = "Voxle/main/SwordSim";
     [6918802270] = "Voxle/main/NewWorld";
+    [10700669209] = "Voxle/main/ControlArmy"
 
 
 }
@@ -33,3 +34,4 @@ end
 if not game.PlaceId == Supported  then
     game.Players.LocalPlayer:Kick("Game Not Supported")
 end
+
