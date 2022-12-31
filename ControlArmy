@@ -108,7 +108,7 @@ Tab:CreateButton({
 	Name = "Teleport Home",
 	Callback = function()
 		for i, v in next, game:GetService("Workspace"):GetChildren() do
-			if v:IsA("Model") and v:FindFirstChild("PLAYERNAME") and v.PLAYERNAME.SurfaceGui.TextLabel.Text == "Kuvuxx" then
+			if v:IsA("Model") and v:FindFirstChild("PLAYERNAME") and v.PLAYERNAME.SurfaceGui.TextLabel.Text == game.Players.LocalPlayer.Name then
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.ZONE.CFrame
 			end
 		end
