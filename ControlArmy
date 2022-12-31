@@ -1,3 +1,4 @@
+lp = game.Players.LocalPlayer
 local Object = {}
 
 for i, v in pairs(game:GetService("Workspace").Objects:GetChildren()) do
@@ -92,14 +93,28 @@ Tab:CreateToggle({
 	CurrentValue = false,
 	Flag = "Toggle2", 
 	Callback = function(Value)
-		a = Value
-		while a do task.wait()
+		b = Value
+		while b do task.wait()
 			local args = {
 				[1] = "Attack",
 				[2] = getSelected()
 			}
 			
 			game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+		end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Mob",
+	CurrentValue = false,
+	Flag = "Toggle3", 
+	Callback = function(Value)
+        d = Value
+        while d do
+        task.wait()
+		pcall(function()
+                lp.Character.HumanoidRootPart.CFrame = getSelected().BOTTOM.CFrame
+		end)
 		end
 	end,
 })
