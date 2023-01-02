@@ -362,6 +362,20 @@ Tab:CreateToggle({
                     }
 
                     game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Sandorian Warrior" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("11"):FindFirstChild("11"),
+                        [2] = "Level 950"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
+                elseif mob == "Divine Soldier" then
+                    local args = {
+                        [1] = workspace.Npc_Workspace.QuestGivers:FindFirstChild("11"):FindFirstChild("11"),
+                        [2] = "Level 1000"
+                    }
+
+                    game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestFunction:InvokeServer(unpack(args))
 
                 end
             end)
@@ -405,6 +419,7 @@ Tab:CreateToggle({
         end
 	end,
 })
+
 Tab:CreateToggle({
 	Name = "Tp to Fruit",
 	CurrentValue = false,
@@ -573,6 +588,21 @@ Tab:CreateToggle({
             }
 
             game:GetService("ReplicatedStorage").Replication.ClientEvents.Stats_Event:FireServer(unpack(args))
+        end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Buso",
+	CurrentValue = false,
+	Flag = "Toggle11", 
+	Callback = function(Value)
+        f = Value
+        while f do task.wait()
+            for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if v.Name == game.Players.LocalPlayer.Name and v.BusoEnabled.Value == false then
+                    game:GetService("Players").LocalPlayer.Character.Buso_Server.Comunication:FireServer()
+                end
+            end
         end
 	end,
 })
