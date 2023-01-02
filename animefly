@@ -1,0 +1,54 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+getgenv().SecureMode = true
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "RSsC4ATvkj", 
+        	RememberJoins = true
+        },
+
+})
+local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
+
+Tab:CreateToggle({
+	Name = "Auto Orbs",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+        a = Value
+        while a do task.wait()
+            local args = {
+                [1] = {
+                    [1] = 0,
+                    [2] = 0,
+                    [3] = 1,
+                    [4] = 0
+                }
+            }
+
+            game:GetService("ReplicatedStorage").Remotes.CollectOrb:FireServer(unpack(args))
+        end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Finish",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+        b = Value
+        while b do task.wait()
+            game:GetService("ReplicatedStorage").Remotes.JumpFinished:InvokeServer()
+
+        end
+	end,
+})
+
