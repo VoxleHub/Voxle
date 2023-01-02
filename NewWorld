@@ -598,11 +598,13 @@ Tab:CreateToggle({
 	Callback = function(Value)
         f = Value
         while f do task.wait()
+            pcall(function()
             for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
                 if v.Name == game.Players.LocalPlayer.Name and v.BusoEnabled.Value == false then
                     game:GetService("Players").LocalPlayer.Character.Buso_Server.Comunication:FireServer()
                 end
-            end
+                end
+            end)
         end
 	end,
 })
