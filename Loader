@@ -1187,41 +1187,9 @@ elseif game.PlaceId == 10700669209 then
     
     Rayfield:LoadConfiguration()
 elseif game.PlaceId == 10446125875 then
-    local TweenService = game:GetService("TweenService")
-local noclipE = false
-local antifall = false
-
-local function noclip()
-    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("BasePart") and v.CanCollide == true then
-            v.CanCollide = false
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
-        end
-    end
-end
-
-local function moveto(obj, speed)
-    local info =
-        TweenInfo.new(
-        ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - obj.Position).Magnitude) / speed,
-        Enum.EasingStyle.Linear
-    )
-    local tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, info, {CFrame = obj})
-
-    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-        antifall = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
-        antifall.Velocity = Vector3.new(0, 0, 0)
-        noclipE = game:GetService("RunService").Stepped:Connect(noclip)
-        tween:Play()
-    end
-
-    tween.Completed:Connect(
-        function()
-            antifall:Destroy()
-            noclipE:Disconnect()
-        end
-    )
-end
+    local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteMan420/bub/main/chub"))()
+    ESP.Players = false
+    ESP.Boxes = false
     local Eggs = {}
 
     for i, v in pairs(game:GetService("Workspace").Maps.Eggs:GetChildren()) do
@@ -1340,28 +1308,50 @@ end
             end
         end,
     })
-    
-        Tab:CreateToggle({
-        Name = "Auto Pick up Fruit",
-        CurrentValue = false,
-        Flag = "Toggle3", 
-        Callback = function(Value)
-            a = Value
-            while a do task.wait()
-                pcall(function()
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosest().CFrame 
-                for i, v in pairs(game:GetService("Workspace").FruitSpawns:GetChildren()) do
-                    if v:IsA("Model") then
-                            if v:FindFirstChild("ProximityPrompt") then
-                                fireproximityprompt(v.ProximityPrompt)
-                                task.wait(.5)
-                            end
-                        end
-                    end
-                end)
-            end
-        end,
+    for i, v in next, game:GetService("Workspace").FruitSpawns:GetChildren() do
+        if v:IsA("Model") then
+    ESP:AddObjectListener(v.Parent, {
+        Name = v.Name,
+        CustomName = v.Name,
+        Color = Color3.fromRGB(255,255,0),
+        IsEnabled = "Fruit"
     })
+    
+    end
+    end
+    local Tab = Window:CreateTab("ESP")
+Tab:CreateToggle({
+	Name = "Toggle ESP",
+	CurrentValue = false,
+	Flag = "Toggle10", 
+	Callback = function(state)
+        ESP:Toggle(state)
+	end,
+})
+     Tab:CreateToggle({
+	Name = "Toggle Boxes",
+	CurrentValue = false,
+	Flag = "Toggle12", 
+	Callback = function(state)
+        ESP.Boxes = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Players",
+	CurrentValue = false,
+	Flag = "Toggle13", 
+	Callback = function(state)
+        ESP.Players = state
+	end,
+})
+Tab:CreateToggle({
+	Name = "Toggle Fruit",
+	CurrentValue = false,
+	Flag = "Toggle16", 
+	Callback = function(state)
+        ESP.Fruit = state
+	end,
+})
     local Tab = Window:CreateTab("Teleport")
     Tab:CreateDropdown({
         Name = "Zones",
