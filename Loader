@@ -1367,6 +1367,22 @@ elseif game.PlaceId == 10446125875 then
             end
         end,
     })
+    Tab:CreateButton({
+        Name = "Print Fruit Spawns (F9)",
+        Callback = function()
+            for i, v in next, game:GetService("Workspace").FruitSpawns:GetChildren() do
+                if v:IsA("Model") then
+            print(v.Name)
+                end
+            end
+        end,
+    })
+    Tab:CreateButton({
+        Name = "Clean F9",
+        Callback = function()
+            print(("\n"):rep(20))
+        end,
+    })
     local Slider = Tab:CreateSlider({
         Name = "WalkSpeed",
         Range = {0, 500},
@@ -1464,7 +1480,7 @@ elseif game.PlaceId == 4934471106 then
         ConfigurationSaving = {
             Enabled = true,
             FolderName = nil, 
-            FileName = "Voxle Hub 1"
+            FileName = "Voxle Hub 6"
         },
             Discord = {
                 Enabled = true,
