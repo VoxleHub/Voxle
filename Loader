@@ -1275,7 +1275,12 @@ elseif game.PlaceId == 10446125875 then
             getgenv().egg = Value
         end,
     })
-    
+    Tab:CreateButton({
+        Name = "Fruit Tp",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosest().CFrame
+        end,
+    })
     Tab:CreateToggle({
         Name = "Auto Single Egg",
         CurrentValue = false,
@@ -1308,50 +1313,7 @@ elseif game.PlaceId == 10446125875 then
             end
         end,
     })
-    for i, v in next, game:GetService("Workspace").FruitSpawns:GetChildren() do
-        if v:IsA("Model") then
-    ESP:AddObjectListener(v.Parent, {
-        Name = v.Name,
-        CustomName = v.Name,
-        Color = Color3.fromRGB(255,255,0),
-        IsEnabled = "Fruit"
-    })
-    
-    end
-    end
-    local Tab = Window:CreateTab("ESP")
-Tab:CreateToggle({
-	Name = "Toggle ESP",
-	CurrentValue = false,
-	Flag = "Toggle10", 
-	Callback = function(state)
-        ESP:Toggle(state)
-	end,
-})
-     Tab:CreateToggle({
-	Name = "Toggle Boxes",
-	CurrentValue = false,
-	Flag = "Toggle12", 
-	Callback = function(state)
-        ESP.Boxes = state
-	end,
-})
-Tab:CreateToggle({
-	Name = "Toggle Players",
-	CurrentValue = false,
-	Flag = "Toggle13", 
-	Callback = function(state)
-        ESP.Players = state
-	end,
-})
-Tab:CreateToggle({
-	Name = "Toggle Fruit",
-	CurrentValue = false,
-	Flag = "Toggle16", 
-	Callback = function(state)
-        ESP.Fruit = state
-	end,
-})
+
     local Tab = Window:CreateTab("Teleport")
     Tab:CreateDropdown({
         Name = "Zones",
