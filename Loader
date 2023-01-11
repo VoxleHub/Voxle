@@ -1275,12 +1275,6 @@ elseif game.PlaceId == 10446125875 then
             getgenv().egg = Value
         end,
     })
-    Tab:CreateButton({
-        Name = "Fruit Tp",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosest().CFrame
-        end,
-    })
     Tab:CreateToggle({
         Name = "Auto Single Egg",
         CurrentValue = false,
@@ -1313,6 +1307,38 @@ elseif game.PlaceId == 10446125875 then
             end
         end,
     })
+    local Section = Tab:CreateSection("If you pick up fruits too fast it will kick/ban you")
+    Tab:CreateToggle({
+        Name = "Auto Fruit Tp",
+        CurrentValue = false,
+        Flag = "Toggle20", 
+        Callback = function(Value)
+            zzz = Value
+            while zzz do task.wait()
+                pcall(function()
+                for i, v in pairs(workspace:GetDescendants()) do
+                    if v.ClassName == "ProximityPrompt" then
+                    v.HoldDuration = 0
+                    end
+                    end
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosest().CFrame
+                end)
+            end
+        end,
+    })
+    Tab:CreateToggle({
+        Name = "Auto Grab Fruit",
+        CurrentValue = false,
+        Flag = "Toggle20", 
+        Callback = function(Value)
+            zz = Value
+            while zz do task.wait()
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,game)
+                task.wait(2)
+            end
+        end,
+    })
+
 
     local Tab = Window:CreateTab("Teleport")
     Tab:CreateDropdown({
@@ -1331,6 +1357,16 @@ elseif game.PlaceId == 10446125875 then
         end,
     })
     local Tab = Window:CreateTab("Local Player")
+    Tab:CreateButton({
+        Name = "Some Free Gamepasses",
+        Callback = function()
+            for i, v in pairs(game.Players.LocalPlayer.PassBools:GetChildren()) do
+                if v.ClassName == "BoolValue" then
+                    v.Value = true
+                end
+            end
+        end,
+    })
     local Slider = Tab:CreateSlider({
         Name = "WalkSpeed",
         Range = {0, 500},
