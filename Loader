@@ -111,7 +111,7 @@ local Window = Rayfield:CreateWindow({
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = nil, 
-		FileName = "Voxle Hub"
+		FileName = "Voxle Hub 2"
 	},
         Discord = {
         	Enabled = true,
@@ -851,7 +851,7 @@ local Window = Rayfield:CreateWindow({
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = nil, 
-		FileName = "Voxle Hub"
+		FileName = "Voxle Hub 3"
 	},
         Discord = {
         	Enabled = true,
@@ -1052,7 +1052,7 @@ elseif game.PlaceId == 10700669209 then
         ConfigurationSaving = {
             Enabled = true,
             FolderName = nil, 
-            FileName = "Voxle Hub"
+            FileName = "Voxle Hub 4"
         },
             Discord = {
                 Enabled = true,
@@ -1228,7 +1228,7 @@ elseif game.PlaceId == 10446125875 then
         ConfigurationSaving = {
             Enabled = true,
             FolderName = nil, 
-            FileName = "Voxle Hub"
+            FileName = "Voxle Hub 5"
         },
             Discord = {
                 Enabled = true,
@@ -1428,7 +1428,7 @@ elseif game.PlaceId == 4934471106 then
         ConfigurationSaving = {
             Enabled = true,
             FolderName = nil, 
-            FileName = "Voxle Hub"
+            FileName = "Voxle Hub 1"
         },
             Discord = {
                 Enabled = true,
