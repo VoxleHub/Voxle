@@ -1,0 +1,131 @@
+local Plr = game.Players.LocalPlayer
+local vu = game:GetService("VirtualUser")
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
+getgenv().SecureMode = true
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub V9jg4gFXzg",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "V9jg4gFXzg", 
+        	RememberJoins = true
+        },
+
+})
+
+local Tab = Window:CreateTab("Main")
+
+local Section = Tab:CreateSection("Farming")
+
+
+Tab:CreateToggle({
+	Name = "Auto Eat",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+		a = Value
+            while a do task.wait()
+                if Plr.Backpack:FindFirstChild("Food") and Plr.Character:FindFirstChild("Food") == nil then
+                    local tool = Plr.Backpack:FindFirstChild("Food")
+                    Plr.Character.Humanoid:EquipTool(tool)
+                end
+                vu:Button1Down(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+                wait(0.1)
+                vu:Button1Up(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+		end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Burp",
+	CurrentValue = false,
+	Flag = "Toggle4", 
+	Callback = function(Value)
+		aa = Value
+            while aa do task.wait()
+                if Plr.Backpack:FindFirstChild("Burp") and Plr.Character:FindFirstChild("Burp") == nil then
+                    local tool = Plr.Backpack:FindFirstChild("Burp")
+                    Plr.Character.Humanoid:EquipTool(tool)
+                end
+                vu:Button1Down(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+                wait(0.1)
+                vu:Button1Up(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+		end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Fart",
+	CurrentValue = false,
+	Flag = "Toggle5", 
+	Callback = function(Value)
+		aa = Value
+            while aa do task.wait()
+                if Plr.Backpack:FindFirstChild("Fart") and Plr.Character:FindFirstChild("Fart") == nil then
+                    local tool = Plr.Backpack:FindFirstChild("Fart")
+                    Plr.Character.Humanoid:EquipTool(tool)
+                end
+                vu:Button1Down(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+                wait(0.1)
+                vu:Button1Up(Vector2.new(100000, 100000), workspace.CurrentCamera.CFrame)
+		end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Auto Rebirth",
+	CurrentValue = false,
+	Flag = "Toggle6", 
+	Callback = function(Value)
+		aaa = Value
+            while aaa do task.wait()
+            game:GetService("ReplicatedStorage").Remotes.rebirthEvent:FireServer()
+		end
+	end,
+})
+
+local Tab = Window:CreateTab("Local Player")
+local Slider = Tab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {0, 500},
+	Increment = 10,
+	Suffix = "WalkSpeed",
+	CurrentValue = 30,
+	Flag = "Slider1", 
+	Callback = function(Value)
+        getgenv().speed = Value
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Toggle",
+	CurrentValue = false,
+	Flag = "Toggle2", 
+	Callback = function(Value)
+        c = Value
+        while c do
+            task.wait()
+            pcall(function()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+            end)
+        end
+	end,
+})
+Tab:CreateToggle({
+	Name = "Inf Jump",
+	CurrentValue = false,
+	Flag = "Toggle3", 
+	Callback = function(Value)
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if Value then
+                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+            end
+         end)
+	end,
+})
+
+Rayfield:LoadConfiguration()
