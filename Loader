@@ -1722,7 +1722,109 @@ elseif game.PlaceId == 4934471106 then
             end
         end,
     })
-    
-Rayfield:LoadConfiguration()
+        
+elseif game.PlaceId == 11542692507 then
+    local Enemies = {}
 
+for i, v in pairs(game:GetService("Workspace")["_ENEMIES"]:GetDescendants()) do
+    if v:IsA "Model" and v.Parent.Parent.Name == "_ENEMIES" then
+		if not table.find(Enemies, tostring(v)) then
+			table.insert(Enemies, tostring(v))
+		end
+    end
+end
+local function getClosest()
+    local dist, thing = math.huge
+    for i, v in next, game:GetService("Workspace")["_ENEMIES"]:GetDescendants() do
+      if  v.Name == "HumanoidRootPart" then
+            local mag =
+                (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+local Plr = game.Players.LocalPlayer
+local vu = game:GetService("VirtualUser")
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
+getgenv().SecureMode = true
+
+local Window = Rayfield:CreateWindow({
+	Name = "Voxle Hub V9jg4gFXzg",
+	LoadingTitle = "Voxle Hub",
+	LoadingSubtitle = "by Voxle",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, 
+		FileName = "Voxle Hub Soul"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "V9jg4gFXzg", 
+        	RememberJoins = true
+        },
+
+})
+
+local Tab = Window:CreateTab("Main")
+
+local Section = Tab:CreateSection("Farming")
+
+
+Tab:CreateToggle({
+	Name = "Auto Attack",
+	CurrentValue = false,
+	Flag = "Toggle1", 
+	Callback = function(Value)
+		a = Value
+            while a do task.wait()
+				local args = {
+				[1] = {
+					[1] = "Hit",
+					[2] = getClosest().Parent
+				}
+			}
+
+			game:GetService("ReplicatedStorage").Remotes.Server:FireServer(unpack(args))
+		end
+	end,
+})
+local Dropdown = Tab:CreateDropdown({
+	Name = "Enemies",
+	Options = Enemies,
+	CurrentOption = "Enemy List",
+	Flag = "Dropdown1", 
+	Callback = function(Value)
+		getgenv().enemy = Value
+	end,
+})
+local function getClosestMob()
+    local dist, thing = math.huge
+    for i, v in next, game:GetService("Workspace")["_ENEMIES"]:GetDescendants() do
+      if  v.Name == "HumanoidRootPart" and v.Parent.Name == enemy then
+            local mag =
+                (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+Tab:CreateToggle({
+	Name = "Auto Mob",
+	CurrentValue = false,
+	Flag = "Toggle2", 
+	Callback = function(Value)
+		b = Value
+            while b do task.wait()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getClosestMob().CFrame
+		end
+	end,
+})
+Rayfield:LoadConfiguration()
 end
